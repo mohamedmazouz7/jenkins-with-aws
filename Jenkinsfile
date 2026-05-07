@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Replace with your actual ECR URI (from the ECR console)
         ECR_REGISTRY = "719484290237.dkr.ecr.eu-west-3.amazonaws.com"
-        APP_NAME     = "my-project" // The name you gave your ECR repo
+        APP_NAME     = "demo-app" // The name you gave your ECR repo
         REGION       = "eu-west-3"
         CLUSTER_NAME = "demo-cluster"
         AWS_CRED     = "aws-credentials-id" // The ID you set in Jenkins Credentials
