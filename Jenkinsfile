@@ -48,7 +48,7 @@ pipeline {
                     // Update kubeconfig so kubectl knows how to talk to your EKS cluster
                     sh "aws eks update-kubeconfig --region ${REGION} --name ${CLUSTER_NAME}"
                     
-                    // Apply your Kubernetes manifests
+                    // Apply your Kubernetes  manifests
                     // This assumes you have a folder named 'k8s' with your deployment files
                     sh "kubectl apply -f k8s/"
                     
