@@ -20,6 +20,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    sh "ls -la"
                     sh "docker build -t ${ECR_REGISTRY}/${APP_NAME}:${BUILD_NUMBER} ."
                     sh "docker tag ${ECR_REGISTRY}/${APP_NAME}:${BUILD_NUMBER} ${ECR_REGISTRY}/${APP_NAME}:latest"
                 }

@@ -18,7 +18,7 @@ spec:
       - name: demo-app
         image: 719484290237.dkr.ecr.eu-west-3.amazonaws.com/my-project:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         resources:
           limits:
             cpu: "500m"
@@ -39,5 +39,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 80
 
