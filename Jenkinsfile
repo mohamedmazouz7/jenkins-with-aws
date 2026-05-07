@@ -28,14 +28,19 @@ pipeline {
         }
 
         stage('Push to ECR') {
-            steps {
+             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CRED}"]]) {
-                    sh "aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
-                    sh "docker push ${ECR_REGISTRY}/${APP_NAME}:${BUILD_NUMBER}"
-                    sh "docker push ${ECR_REGISTRY}/${APP_NAME}:latest"
+                    script {
+                        // The login command
+                        sh "aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
+                        
+                        // Push the images
+                        sh "docker push ${ECR_REGISTRY}/${APP_NAME}:${BUILD_NUMBER}"
+                        sh "docker push ${ECR_REGISTRY}/${APP_NAME}:latest"
+                    }
                 }
             }
-        }
+	}
 
         stage('Deploy to EKS') {
             steps {
