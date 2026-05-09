@@ -42,10 +42,8 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CRED}"]]) {
                     sh "aws eks update-kubeconfig --region ${REGION} --name ${CLUSTER_NAME}"
-                    // Inject the exact build number into the manifest before applying
                     sh "sed -i 's|:latest|:${BUILD_NUMBER}|g' k8s/deployment.yaml"
                     sh "kubectl apply -f k8s/"
-                    // Wait and confirm rollout succeeded
                     sh "kubectl rollout status deployment/${K8S_DEPLOY_NAME} --timeout=120s"
                 }
             }
